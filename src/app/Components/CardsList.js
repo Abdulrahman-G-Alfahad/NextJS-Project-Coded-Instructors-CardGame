@@ -1,42 +1,63 @@
 "use client";
-import Image from "next/image";
+import { useState, useEffect } from "react";
 import CardItem from "./CardItem";
-import { useState } from "react";
 
 function CardsList({ instructors }) {
+  const [flippedCards, setFlippedCards] = useState([]);
   const [matched, setMatched] = useState([]);
+  const [shuffledInstructors, setShuffledInstructors] = useState([]);
 
-  function shuffle(array) {
-    let currentIndex = array.length;
+  useEffect(() => {
+    const doubleInstructors = [...instructors, ...instructors];
+    const shuffled = doubleInstructors.sort(() => Math.random() - 0.5);
+    setShuffledInstructors(shuffled);
+  }, [instructors]);
 
-    // While there remain elements to shuffle...
-    while (currentIndex != 0) {
-      // Pick a remaining element...
-      let randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
+  function matchHandler(instructor, index) {
+    if (flippedCards.length === 2) {
+      return;
+    }
 
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ];
+    if (flippedCards.length === 1 && flippedCards[0].index === index) {
+      return;
+    }
+
+    const newFlippedCards = [...flippedCards, { instructor, index }];
+
+    setFlippedCards(newFlippedCards);
+
+    if (newFlippedCards.length === 2) {
+      const [firstCard, secondCard] = newFlippedCards;
+
+      if (firstCard.instructor.id === secondCard.instructor.id) {
+        setMatched((prevMatched) => [
+          ...prevMatched,
+          firstCard.instructor.id,
+          secondCard.instructor.id,
+        ]);
+        setTimeout(() => setFlippedCards([]), 500);
+      } else {
+        setTimeout(() => setFlippedCards([]), 2000);
+      }
     }
   }
-  const doubleInstructors = [...instructors, ...instructors];
 
-  shuffle(doubleInstructors);
-
-  const cardList = doubleInstructors.map((instructor, index) => (
-    <CardItem
-      key={Math.random()}
-      instructor={instructor}
-      index={index}
-      matched={matched}
-      setMatched={setMatched}
-    />
-  ));
-
-  return <div className="grid grid-cols-4 gap-2">{cardList}</div>;
+  return (
+    <div className="grid grid-cols-4 gap-4 p-4">
+      {shuffledInstructors.map((instructor, index) => (
+        <CardItem
+          key={index}
+          instructor={instructor}
+          index={index}
+          isFlipped={
+            flippedCards.some((card) => card.index === index) ||
+            matched.includes(instructor.id)
+          }
+          matchHandler={matchHandler}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default CardsList;
