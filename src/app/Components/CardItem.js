@@ -15,18 +15,17 @@ function CardItem({ instructor, index, matched, setMatched }) {
     }
 
     if (matched.length === 0) {
-      setMatched([instructor]);
+      //setMatched([instructor]);
     } else if (matched[0].id === instructor.id) {
-      setMatched([]);
+      //setMatched([]);
     } else {
       setFlip(instructor.imageBack);
     }
   }
-  console.log(flip);
 
   return (
     <div
-      className="h-120 w-72 rounded shadow-lg mx-auto border border-palette-lighter"
+      className="h-120 w-70 rounded shadow-lg mx-auto border border-palette-lighter"
       onClick={clickHandler}
     >
       <Image
