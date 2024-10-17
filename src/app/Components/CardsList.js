@@ -24,9 +24,7 @@ function CardsList({ instructors }) {
   }
   const doubleInstructors = [...instructors, ...instructors];
 
-  shuffle(instructors);
-
-  console.log(doubleInstructors);
+  shuffle(doubleInstructors);
 
   const cardList = doubleInstructors.map((instructor, index) => (
     <CardItem
