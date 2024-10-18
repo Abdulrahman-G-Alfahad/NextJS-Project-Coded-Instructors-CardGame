@@ -2,13 +2,13 @@
 import { useState, useEffect } from "react";
 import CardItem from "./CardItem";
 
-function CardsList({ instructors }) {
+function CardsList({ instructors, incrementScore, decrementScore }) {
   const [flippedCards, setFlippedCards] = useState([]);
   const [matched, setMatched] = useState([]);
   const [shuffledInstructors, setShuffledInstructors] = useState([]);
 
   useEffect(() => {
-    const doubleInstructors = [...instructors, ...instructors];
+    const doubleInstructors = [...instructors, ...instructors]; //this to have 2 images of the same instructor
     const shuffled = doubleInstructors.sort(() => Math.random() - 0.5);
     setShuffledInstructors(shuffled);
   }, [instructors]);
@@ -29,18 +29,21 @@ function CardsList({ instructors }) {
     if (newFlippedCards.length === 2) {
       const [firstCard, secondCard] = newFlippedCards;
 
+      //if cards are matched
       if (firstCard.instructor.id === secondCard.instructor.id) {
         setMatched((prevMatched) => [
           ...prevMatched,
           firstCard.instructor.id,
           secondCard.instructor.id,
         ]);
-        setTimeout(() => setFlippedCards([]), 500);
+        incrementScore();
+        setTimeout(() => setFlippedCards([]), 400);
       } else {
-        setTimeout(() => setFlippedCards([]), 2000);
+        decrementScore();
+        setTimeout(() => setFlippedCards([]), 400);
       }
     }
-  }
+  } //end of matchHandler
 
   return (
     <div className="grid grid-cols-4 gap-4 p-4">

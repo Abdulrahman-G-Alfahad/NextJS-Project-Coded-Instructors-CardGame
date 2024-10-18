@@ -11,7 +11,7 @@ export default function Home() {
     <div className="">
       <h1 className="leading-relaxed font-primary font-extrabold text-4xl text-center text-palette-primary mt-4 py-2 sm:py-4">
         git-Instructor
-        <ResultTracker />
+        <ResultTracker instructors={instructors} />
       </h1>
       <br></br>
       <CardsList instructors={instructors} />
