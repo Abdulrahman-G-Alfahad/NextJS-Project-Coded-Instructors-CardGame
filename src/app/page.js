@@ -1,8 +1,6 @@
 " use client";
 
-import Image from "next/image";
 import instructors from "./Data/Instructors";
-import CardsList from "./Components/CardsList";
 import ResultTracker from "./Components/ResultTracker";
 
 export default function Home() {
@@ -13,8 +11,6 @@ export default function Home() {
         git-Instructor
         <ResultTracker instructors={instructors} />
       </h1>
-      <br></br>
-      <CardsList instructors={instructors} />
     </div>
   );
 }
