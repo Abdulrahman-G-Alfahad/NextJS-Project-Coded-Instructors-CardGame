@@ -6,11 +6,6 @@ function ResultTracker({ instructors }) {
   const [score, setScore] = useState(0);
   const [faild, setFaild] = useState(0);
 
-  // const handleIncrement = () => {
-  //   setScore((prevScore) => prevScore + 10);
-  //   if (incrementScore) incrementScore();
-  // };
-
   const incrementScore = () => {
     setScore((newScore) => newScore + 1);
   };
