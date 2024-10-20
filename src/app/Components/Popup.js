@@ -1,35 +1,31 @@
 "use client";
 
-//import { useState} from "react";
 import Image from "next/image";
 
 import "./Popup.css";
-import React, { useState } from "react";
 
 function Popup({ letsPop, toggelModal }) {
-  //   const [letsPop, setLetsPop] = useState(false);
-
-  //   const userWon = () => {
-  //     setLetsPop(!letsPop);
-  //   };
-
-  //   const closePop = () => {
-  //     setLetsPop(letsPop);
-  //   };
-
   return (
     <>
       {letsPop && (
         <div className="modal">
           <div className="overlay"></div>
           <div className="modal-content">
-            <p>Congratulations ! You know your instructors</p>
-            <Image
-              src="https://your-gif-url.com/gif.gif"
-              width={250}
-              height={250}
-            />
-            <button className="close-modal" onClick={toggelModal}>
+            <p className="mt-25 text-lg">
+              Congratulations ! You know your instructors
+            </p>
+            <div className="flex justify-center items-center ">
+              <Image
+                src="https://www.troublefreepool.com/media/ferrell-gif.3711/full"
+                alt="Congrats"
+                width={250}
+                height={250}
+              />
+            </div>
+            <button
+              className="bg-gray-200 hover:bg-white text-black p-2 rounded-full text-base"
+              onClick={toggelModal}
+            >
               CLOSE
             </button>
           </div>

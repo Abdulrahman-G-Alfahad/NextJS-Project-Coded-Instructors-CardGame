@@ -6,13 +6,10 @@ import Popup from "./Components/Popup";
 export default function Home() {
   return (
     <div className="">
-
       <h1 className="leading-relaxed font-primary font-extrabold text-4xl text-center text-palette-primary mt-4 py-2 sm:py-4">
-        git-Instructor
         <ResultTracker instructors={instructors} />
-        <Popup/>
+        <Popup />
       </h1>
-
     </div>
   );
 }
