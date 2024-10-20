@@ -1,11 +1,17 @@
 "use client";
 import { useState, useEffect } from "react";
 import CardItem from "./CardItem";
+import Popup from "./Popup";
 
-function CardsList({ instructors, incrementScore, incrementFailed }) {
+function CardsList({ instructors, incrementScore, incrementFailed, userWon }) {
   const [flippedCards, setFlippedCards] = useState([]);
   const [matched, setMatched] = useState([]);
   const [shuffledInstructors, setShuffledInstructors] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggelModal = () => {
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     const doubleInstructors = [...instructors, ...instructors];
@@ -37,13 +43,20 @@ function CardsList({ instructors, incrementScore, incrementFailed }) {
           secondCard.instructor.id,
         ]);
         incrementScore();
-        setTimeout(() => setFlippedCards([]), 1500);
+        setTimeout(() => {
+          setFlippedCards([]);
+          if (matched.length + 2 === shuffledInstructors.length) {
+            toggelModal();
+          }
+        }, 1500);
       } else {
         incrementFailed();
         setTimeout(() => setFlippedCards([]), 1500);
       }
     }
   }
+
+  console.log(isOpen);
 
   return (
     <div className="grid grid-cols-4 gap-4 p-4">
@@ -59,6 +72,7 @@ function CardsList({ instructors, incrementScore, incrementFailed }) {
           matchHandler={matchHandler}
         />
       ))}
+      {isOpen && <Popup letsPop={isOpen} toggelModal={toggelModal} />}
     </div>
   );
 }
