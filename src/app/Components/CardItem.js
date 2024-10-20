@@ -17,17 +17,34 @@ function CardItem({ instructor, index, isFlipped, matchHandler }) {
 
   return (
     <div
-      className="h-120 w-70 rounded shadow-lg mx-auto border border-palette-lighter cursor-pointer"
+      className={`flip-card h-64 w-64 cursor-pointer`}
       onClick={clickHandler}
     >
-      <Image
-        key={index}
-        src={flip ? instructor.image : instructor.imageBack}
-        alt={`Card ${index}`}
-        width={250}
-        height={250}
-        className="rounded"
-      />
+      <div
+        className={`flip-card-inner relative h-full w-full transform transition-transform duration-700 ${
+          flip ? "rotate-y-180" : ""
+        }`}
+      >
+        <div className="flip-card-front backface-hidden">
+          <Image
+            src={instructor.imageBack}
+            alt={`Card back ${index}`}
+            width={250}
+            height={250}
+            className="rounded"
+          />
+        </div>
+
+        <div className="flip-card-back backface-hidden">
+          <Image
+            src={instructor.image}
+            alt={`Card front ${index}`}
+            width={250}
+            height={250}
+            className="rounded"
+          />
+        </div>
+      </div>
     </div>
   );
 }

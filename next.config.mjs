@@ -11,14 +11,6 @@ const nextConfig = {
         protocol: "https",
         hostname: "www.troublefreepool.com",
       },
-      {
-        protocol: "https",
-        hostname: "i0.wp.com",
-      },
-      {
-        protocol: "https",
-        hostname: "your-gif-url.com",
-      },
     ],
   },
 };

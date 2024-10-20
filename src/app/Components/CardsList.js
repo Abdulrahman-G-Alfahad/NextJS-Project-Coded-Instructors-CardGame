@@ -56,8 +56,6 @@ function CardsList({ instructors, incrementScore, incrementFailed, userWon }) {
     }
   }
 
-  console.log(isOpen);
-
   return (
     <div className="grid grid-cols-4 gap-4 p-4">
       {shuffledInstructors.map((instructor, index) => (
